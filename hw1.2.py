@@ -3,8 +3,11 @@ import urllib.request
 import io
 
 list=[];
+list_all=[];
 list1=[0]*100;
+list5=[0]*100;
 counter=0;
+counter_two=0;
 i = 0;
 list2=[100]
 list3=[100]
@@ -21,22 +24,56 @@ response3 = urllib.request.urlopen(url3)
 #response4 = urllib.request.urlopen(url4)
 
 datareader = csv.reader(io.TextIOWrapper(response1))#.read().decode('utf-8'))
-print ("This is the number of liquor stores per neighborhood ")
 print("                                     ")
 for row in datareader:
-       if ("Liquor" in row[0] or "LIQUOR" in row[0] or "liquor" in row[0]):
-              list.append(row[7] and row [8])
-              for i in row[8]:
-                     counter=counter+1
-                     list1[int(row[8])]= list1[int(row[8])]+1
+       if ("Liquor" in row[0] or "LIQUOR" in row[0] or "liquor" in row[0]): #row 0 is the name of the store
+              list.append(row [8])#row 8 is the community number
+              #for i in row[8]: 
+              counter=counter+1
+              list1[int(row[8])]= list1[int(row[8])]+1
+# grabs all stores
+       if( row[7]=="COMMUNITY AREA NAME"):
+              continue
+       list_all.append(row[7]and row [8])
+       #for i in row[8]:
+       counter_two=counter_two+1
+       list5[int(row[8])]= list5[int(row[8])]+1
 #print(list1[38])
 #while  i< len(list1):
        #if list1[i]>0:
              #print(list1[i])
        #i=i+1
+#while i<100:
+      # print(list1[i])
+       #i=i+1
+#i=0;
+#while i<100:
+      # print(list5[i])
+      # i=i+1
+#i=0;
+print(" The number of liquors stores in Community Area per store in the Community Area")
+print ("Rogers Park", list1[1],"Englewood",list1[39])
+print("Rogers Park", list5[1], "Englewood",list5[39])
+print ("                                                ")
+Avg1=(counter/counter_two)*100
+print("Shows the total percentage of liquor stores compared to non liquor stores and the percent of liquor stores per community area ",  Avg1)
+
+i=0;
+while i<80:
+       if list5[i]>0:
+              addin=list1[i];
+              addin_two=list5[i];
+              Avg2=(addin/addin_two)*100
+              print(Avg2)
+       i=i+1
+i=0;
+
 print(list)
 print("There were a total of: ", counter,  " liquor stores in Cook County neighborhoods in 2013")
-print("                                     ")             
+print(list_all)
+print("There were a total of: ", counter_two,  "stores in Cook County neighborhoods in 2013")
+print("                                     ")
+print("                                     ")
 datareader2 = csv.reader(io.TextIOWrapper(response2))#.read().decode('utf-8'))
 print("Affordable housing and the number of self described liqoure stores in the neighborhood where it is located based on 2013 data ")
 print("                                     ")
@@ -60,6 +97,7 @@ for row in datareader3:
 
 
 #print(list2, end=' ')	
+
 
 
 
