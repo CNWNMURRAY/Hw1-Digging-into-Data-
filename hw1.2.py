@@ -1,6 +1,7 @@
 import csv # needed for csv file
 import urllib.request
 import io
+import unittest
 
 list=[];
 list_all=[];
@@ -96,9 +97,16 @@ for row in datareader3:
 
 
 
-#print(list2, end=' ')	
+class TestData(unittest.TestCase):
 
+    def test_first_average(self):
+        self.assertEqual(list1[1], 13)
 
+    def test_average(self):
+        self.assertTrue(list5[39],4)
+       
+
+ 
 
 
 
